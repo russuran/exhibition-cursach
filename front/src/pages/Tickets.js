@@ -34,9 +34,9 @@ const Tickets = () => {
 
     const handleFormSubmit = async (values) => {
         if (currentTicket) {
-            await axios.put(`/tickets/${currentTicket.ticket_id}`, values);
+            await axios.put(`http://localhost:3001/tickets/${currentTicket.ticket_id}`, values);
         } else {
-            await axios.post('/tickets/', values);
+            await axios.post('http://localhost:3001/tickets/', values);
         }
         fetchTickets();
         handleModalClose();

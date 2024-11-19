@@ -34,9 +34,9 @@ const Employees = () => {
 
     const handleFormSubmit = async (values) => {
         if (currentEmployee) {
-            await axios.put(`/employees/${currentEmployee.employee_id}`, values);
+            await axios.put(`http://localhost:3001/employees/${currentEmployee.employee_id}`, values);
         } else {
-            await axios.post('/employees/', values);
+            await axios.post('http://localhost:3001/employees/', values);
         }
         fetchEmployees();
         handleModalClose();

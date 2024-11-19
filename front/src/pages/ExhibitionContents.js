@@ -34,9 +34,9 @@ const ExhibitionContents = () => {
 
     const handleFormSubmit = async (values) => {
         if (currentContent) {
-            await axios.put(`/exhibition_contents/${currentContent.exhibit_id}/${currentContent.exhibition_id}`, values);
+            await axios.put(`http://localhost:3001/exhibition_contents/${currentContent.exhibit_id}/${currentContent.exhibition_id}`, values);
         } else {
-            await axios.post('/exhibition_contents/', values);
+            await axios.post('http://localhost:3001/exhibition_contents/', values);
         }
         fetchContents();
         handleModalClose();

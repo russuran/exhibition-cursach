@@ -34,9 +34,9 @@ const Restorations = () => {
 
     const handleFormSubmit = async (values) => {
         if (currentRestoration) {
-            await axios.put(`/restorations/${currentRestoration.restoration_id}`, values);
+            await axios.put(`http://localhost:3001/restorations/${currentRestoration.restoration_id}`, values);
         } else {
-            await axios.post('/restorations/', values);
+            await axios.post('http://localhost:3001/restorations/', values);
         }
         fetchRestorations();
         handleModalClose();
