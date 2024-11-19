@@ -13,12 +13,12 @@ const Restorations = () => {
     }, []);
 
     const fetchRestorations = async () => {
-        const response = await axios.get('/restorations/');
+        const response = await axios.get('http://localhost:3001/restorations/');
         setRestorations(response.data);
     };
 
     const handleDelete = async (restorationId) => {
-        await axios.delete(`/restorations/${restorationId}`);
+        await axios.delete(`http://localhost:3001/restorations/${restorationId}`);
         fetchRestorations();
     };
 

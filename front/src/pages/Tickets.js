@@ -13,12 +13,12 @@ const Tickets = () => {
     }, []);
 
     const fetchTickets = async () => {
-        const response = await axios.get('/tickets/');
+        const response = await axios.get('http://localhost:3001/tickets/');
         setTickets(response.data);
     };
 
     const handleDelete = async (ticketId) => {
-        await axios.delete(`/tickets/${ticketId}`);
+        await axios.delete(`http://localhost:3001/tickets/${ticketId}`);
         fetchTickets();
     };
 

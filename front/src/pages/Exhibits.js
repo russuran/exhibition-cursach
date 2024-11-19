@@ -13,12 +13,12 @@ const Exhibits = () => {
     }, []);
 
     const fetchExhibits = async () => {
-        const response = await axios.get('/exhibits/');
+        const response = await axios.get('http://localhost:3001/exhibits/');
         setExhibits(response.data);
     };
 
     const handleDelete = async (exhibitId) => {
-        await axios.delete(`/exhibits/${exhibitId}`);
+        await axios.delete(`http://localhost:3001/exhibits/${exhibitId}`);
         fetchExhibits();
     };
 

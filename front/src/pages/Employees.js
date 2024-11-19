@@ -13,12 +13,12 @@ const Employees = () => {
     }, []);
 
     const fetchEmployees = async () => {
-        const response = await axios.get('/employees/');
+        const response = await axios.get('http://localhost:3001/employees/');
         setEmployees(response.data);
     };
 
     const handleDelete = async (employeeId) => {
-        await axios.delete(`/employees/${employeeId}`);
+        await axios.delete(`http://localhost:3001/employees/${employeeId}`);
         fetchEmployees();
     };
 
