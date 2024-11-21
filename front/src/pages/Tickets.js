@@ -13,12 +13,12 @@ const Tickets = () => {
     }, []);
 
     const fetchTickets = async () => {
-        const response = await axios.get('http://localhost:3001/tickets/');
+        const response = await axios.get('http://localhost:5000/tickets/');
         setTickets(response.data);
     };
 
     const handleDelete = async (ticketId) => {
-        await axios.delete(`http://localhost:3001/tickets/${ticketId}`);
+        await axios.delete(`http://localhost:5000/tickets/${ticketId}`);
         fetchTickets();
     };
 
@@ -34,9 +34,9 @@ const Tickets = () => {
 
     const handleFormSubmit = async (values) => {
         if (currentTicket) {
-            await axios.put(`http://localhost:3001/tickets/${currentTicket.ticket_id}`, values);
+            await axios.put(`http://localhost:5000/tickets/${currentTicket.ticket_id}`, values);
         } else {
-            await axios.post('http://localhost:3001/tickets/', values);
+            await axios.post('http://localhost:5000/tickets/', values);
         }
         fetchTickets();
         handleModalClose();
@@ -53,7 +53,7 @@ const Tickets = () => {
                 <Table.Column title="Цена" dataIndex="price" />
                 <Table.Column title="Дата" dataIndex="date" />
                 <Table.Column title="Способ оплаты" dataIndex="payment_method" />
-                <Table.Column title="Actions" render={(text, ticket) => (
+                <Table.Column title="Действия" render={(text, ticket) => (
                     <div style={{ display: 'flex', gap: 10 }}>
                         <Button onClick={() => handleModalOpen(ticket)}>Редактировать</Button>
                         <Button onClick={() => handleDelete(ticket.ticket_id)}>Удалить</Button>

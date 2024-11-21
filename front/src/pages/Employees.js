@@ -13,12 +13,12 @@ const Employees = () => {
     }, []);
 
     const fetchEmployees = async () => {
-        const response = await axios.get('http://localhost:3001/employees/');
+        const response = await axios.get('http://localhost:5000/employees/');
         setEmployees(response.data);
     };
 
     const handleDelete = async (employeeId) => {
-        await axios.delete(`http://localhost:3001/employees/${employeeId}`);
+        await axios.delete(`http://localhost:5000/employees/${employeeId}`);
         fetchEmployees();
     };
 
@@ -34,9 +34,9 @@ const Employees = () => {
 
     const handleFormSubmit = async (values) => {
         if (currentEmployee) {
-            await axios.put(`http://localhost:3001/employees/${currentEmployee.employee_id}`, values);
+            await axios.put(`http://localhost:5000/employees/${currentEmployee.employee_id}`, values);
         } else {
-            await axios.post('http://localhost:3001/employees/', values);
+            await axios.post('http://localhost:5000/employees/', values);
         }
         fetchEmployees();
         handleModalClose();

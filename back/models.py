@@ -60,5 +60,6 @@ class Restoration(Base):
 class ExhibitionContent(Base):
     __tablename__ = 'ExhibitionContent'
     
-    exhibit_id = Column(Integer, ForeignKey('Exhibit.exhibit_id'), primary_key=True)
-    exhibition_id = Column(Integer, ForeignKey('Exhibition.exhibition_id'), primary_key=True)
+    id = Column(Integer, primary_key=True, index=True)
+    exhibit_id = Column(Integer, ForeignKey('Exhibit.exhibit_id'))
+    exhibition_id = Column(Integer, ForeignKey('Exhibition.exhibition_id'))

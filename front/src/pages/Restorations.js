@@ -13,12 +13,12 @@ const Restorations = () => {
     }, []);
 
     const fetchRestorations = async () => {
-        const response = await axios.get('http://localhost:3001/restorations/');
+        const response = await axios.get('http://localhost:5000/restorations/');
         setRestorations(response.data);
     };
 
     const handleDelete = async (restorationId) => {
-        await axios.delete(`http://localhost:3001/restorations/${restorationId}`);
+        await axios.delete(`http://localhost:5000/restorations/${restorationId}`);
         fetchRestorations();
     };
 
@@ -34,9 +34,9 @@ const Restorations = () => {
 
     const handleFormSubmit = async (values) => {
         if (currentRestoration) {
-            await axios.put(`http://localhost:3001/restorations/${currentRestoration.restoration_id}`, values);
+            await axios.put(`http://localhost:5000/restorations/${currentRestoration.restoration_id}`, values);
         } else {
-            await axios.post('http://localhost:3001/restorations/', values);
+            await axios.post('http://localhost:5000/restorations/', values);
         }
         fetchRestorations();
         handleModalClose();
@@ -50,13 +50,14 @@ const Restorations = () => {
             <Table dataSource={restorations} rowKey="restoration_id">
                 <Table.Column title="Код Экспоната" dataIndex="exhibit_id" />
                 <Table.Column title="Код Сотрудника" dataIndex="employee_id" />
+                <Table.Column title="Причина Реставрации" dataIndex="restoration_reason" />
                 <Table.Column title="Дата Начала" dataIndex="start_date" />
                 <Table.Column title="Дата Конца" dataIndex="end_date" />
-                <Table.Column title="Actions" render={(text, restoration) => (
-                    <>
+                <Table.Column title="Действия" render={(text, restoration) => (
+                    <div style={{ display: 'flex', gap: 10 }}>
                         <Button onClick={() => handleModalOpen(restoration)}>Редактировать</Button>
                         <Button onClick={() => handleDelete(restoration.restoration_id)}>Удалить</Button>
-                    </>
+                    </div>
                 )} />
             </Table>
             <Modal

@@ -13,12 +13,12 @@ const Exhibits = () => {
     }, []);
 
     const fetchExhibits = async () => {
-        const response = await axios.get('http://localhost:3001/exhibits/');
+        const response = await axios.get('http://localhost:5000/exhibits/');
         setExhibits(response.data);
     };
 
     const handleDelete = async (exhibitId) => {
-        await axios.delete(`http://localhost:3001/exhibits/${exhibitId}`);
+        await axios.delete(`http://localhost:5000/exhibits/${exhibitId}`);
         fetchExhibits();
     };
 
@@ -34,9 +34,9 @@ const Exhibits = () => {
 
     const handleFormSubmit = async (values) => {
         if (currentExhibit) {
-            await axios.put(`http://localhost:3001/exhibits/${currentExhibit.exhibit_id}`, values);
+            await axios.put(`http://localhost:5000/exhibits/${currentExhibit.exhibit_id}`, values);
         } else {
-            await axios.post('http://localhost:3001/exhibits/', values);
+            await axios.post('http://localhost:5000/exhibits/', values);
         }
         fetchExhibits();
         handleModalClose();
@@ -48,9 +48,13 @@ const Exhibits = () => {
                 Добавить экспонат
             </Button>
             <Table dataSource={exhibits} rowKey="exhibit_id">
-                <Table.Column title="Title" dataIndex="title" />
-                <Table.Column title="Description" dataIndex="description" />
-                <Table.Column title="Actions" render={(text, exhibit) => (
+                <Table.Column title="Название" dataIndex="title" />
+                <Table.Column title="Описание" dataIndex="description" />
+                <Table.Column title="Автор" dataIndex="author" />
+                <Table.Column title="Год создания" dataIndex="year_created" />
+                <Table.Column title="Страна происхождения" dataIndex="country_of_origin" />
+                <Table.Column title="Материал" dataIndex="material" />
+                <Table.Column title="Действия" render={(text, exhibit) => (
                     <div style={{ display: 'flex', gap: '10px' }}>
                         <Button onClick={() => handleModalOpen(exhibit)}>Редактировать</Button>
                         <Button onClick={() => handleDelete(exhibit.exhibit_id)}>Удалить</Button>
