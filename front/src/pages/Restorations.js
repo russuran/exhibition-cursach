@@ -8,6 +8,8 @@ const Restorations = () => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [currentRestoration, setCurrentRestoration] = useState(null);
 
+    const role = localStorage.getItem('role');
+
     useEffect(() => {
         fetchRestorations();
     }, []);
@@ -44,21 +46,25 @@ const Restorations = () => {
 
     return (
         <div>
-            <Button type="primary" onClick={() => handleModalOpen(null)} style={{ marginBottom: 16 }}>
-                Добавить реставрацию
-            </Button>
+            {role === 'personal' && (
+                <Button type="primary" onClick={() => handleModalOpen(null)} style={{ marginBottom: 16 }}>
+                    Добавить Реставрацию
+                </Button>
+            )}
             <Table dataSource={restorations} rowKey="restoration_id">
                 <Table.Column title="Код Экспоната" dataIndex="exhibit_id" />
                 <Table.Column title="Код Сотрудника" dataIndex="employee_id" />
                 <Table.Column title="Причина Реставрации" dataIndex="restoration_reason" />
                 <Table.Column title="Дата Начала" dataIndex="start_date" />
                 <Table.Column title="Дата Конца" dataIndex="end_date" />
+                {role === 'personal' && 
                 <Table.Column title="Действия" render={(text, restoration) => (
                     <div style={{ display: 'flex', gap: 10 }}>
                         <Button onClick={() => handleModalOpen(restoration)}>Редактировать</Button>
                         <Button onClick={() => handleDelete(restoration.restoration_id)}>Удалить</Button>
                     </div>
                 )} />
+                }
             </Table>
             <Modal
                 title={currentRestoration ? "Редактировать реставрацию" : "Добавить реставрацию"}

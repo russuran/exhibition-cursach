@@ -9,6 +9,13 @@ import Restorations from './pages/Restorations';
 import ExhibitionContents from './pages/ExhibitionContents';
 
 const App = () => {
+    const roles = {
+        admin: 'Администратор',
+        manager: 'Менеджер',
+        personal: 'Персонал',
+        null: 'Не выбрана'
+    };
+
     return (
         <Router>
             <Navbar />
@@ -20,7 +27,14 @@ const App = () => {
                     <Route path="/tickets" element={<Tickets />} />
                     <Route path="/restorations" element={<Restorations />} />
                     <Route path="/exhibition-contents" element={<ExhibitionContents />} />
-                    <Route path="/" element={<h1>Welcome to the Museum Management System</h1>} />
+                    <Route path="/" element={
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 40 }}>
+                        <h1>Система менеджмента музея</h1>
+
+                        <p>Текущая роль: { roles[localStorage.getItem('role') || 'null'] }</p>
+
+                    </div>
+                    } />
                 </Routes>
             </div>
         </Router>
