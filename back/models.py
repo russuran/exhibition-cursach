@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Date, ForeignKey, CheckConstraint
+from sqlalchemy import Column, Integer, String, Date, ForeignKey, CheckConstraint, BigInteger
 from sqlalchemy.orm import relationship
 from database import Base
 
@@ -32,7 +32,7 @@ class Employee(Base):
     employee_id = Column(Integer, primary_key=True, index=True)
     full_name = Column(String(50), nullable=False)
     position = Column(String(50), nullable=False)
-    phone_number = Column(Integer, unique=True, nullable=False)
+    phone_number = Column(BigInteger, unique=True, nullable=False)
     salary = Column(Integer, nullable=False)
 
     exhibitions = relationship("Exhibition", back_populates="employee")

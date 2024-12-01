@@ -42,6 +42,14 @@ const Tickets = () => {
     };
 
     const handleFormSubmit = async (values) => {
+        if (!values.payment_method) {
+            values.payment_method = 'Карта';
+        }
+
+        if (!values.date) {
+            const currentDate = new Date();
+            values.date = currentDate;
+        }
         if (currentTicket) {
             await axios.put(`http://localhost:5000/tickets/${currentTicket.ticket_id}`, values);
         } else {

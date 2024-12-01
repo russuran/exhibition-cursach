@@ -46,6 +46,14 @@ const RestorationForm = ({ initialValues, onSubmit }) => {
         onSubmit(values);
     };
 
+    const validateEndDate = (_, value) => {
+        const startDate = form.getFieldValue('start_date');
+        if (!value || !startDate) {
+            return Promise.resolve();
+        }
+        return value >= startDate ? Promise.resolve() : Promise.reject(new Error('Дата окончания должна быть больше или равна дате начала'));
+    };
+
     return (
         <Form 
             form={form} 
@@ -62,7 +70,7 @@ const RestorationForm = ({ initialValues, onSubmit }) => {
                 <Select placeholder="Выберите экспонат">
                     {exhibits.map(exhibit => (
                         <Select.Option key={exhibit.id} value={exhibit.id}>
-                            {exhibit.name} {/* Assuming exhibit has a name property */}
+                            {exhibit.name}
                         </Select.Option>
                     ))}
                 </Select>
@@ -75,7 +83,7 @@ const RestorationForm = ({ initialValues, onSubmit }) => {
                 <Select placeholder="Выберите сотрудника">
                     {employees.map(employee => (
                         <Select.Option key={employee.id} value={employee.id}>
-                            {employee.name} {/* Assuming employee has a name property */}
+                            {employee.name}
                         </Select.Option>
                     ))}
                 </Select>
@@ -90,6 +98,7 @@ const RestorationForm = ({ initialValues, onSubmit }) => {
             <Form.Item 
                 name="end_date" 
                 label="Дата конца"
+                rules={[{ required: true, validator: validateEndDate }]}
             >
                 <Input type="date" />
             </Form.Item>

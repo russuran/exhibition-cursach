@@ -57,6 +57,7 @@ const Exhibits = () => {
         });
     };
 
+
     const filteredExhibits = exhibits.filter(exhibit => {
         return (
             exhibit.title.toLowerCase().includes(filters.title.toLowerCase()) &&

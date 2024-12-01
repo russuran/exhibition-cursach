@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, Select } from 'antd';
 
 const EmployeeForm = ({ initialValues, onSubmit }) => {
     const [form] = Form.useForm();
@@ -34,9 +34,26 @@ const EmployeeForm = ({ initialValues, onSubmit }) => {
             <Form.Item 
                 name="position" 
                 label="Должность" 
-                rules={[{ required: true, message: 'Пожалуйста, введите должность' }]}
+                rules={[{ required: true, message: 'Пожалуйста, выберите должность' }]}
             >
-                <Input />
+                <Select placeholder="Выберите должность">
+                    <Select.Option key="Экскурсовод" value="Экскурсовод">
+                        Экскурсовод
+                    </Select.Option>
+                    <Select.Option key="Реставратор" value="Реставратор">
+                        Реставратор
+                    </Select.Option>
+                    <Select.Option key="Смотрящий" value="Смотрящий">
+                        Смотрящий
+                    </Select.Option>
+                    <Select.Option key="Контроллер" value="Контроллер">
+                        Контроллер
+                    </Select.Option>
+                    <Select.Option key="Тех. сотрудник" value="Тех. сотрудник">
+                        Тех. сотрудник
+                    </Select.Option>
+                    
+                </Select>
             </Form.Item>
             <Form.Item 
                 name="phone_number" 

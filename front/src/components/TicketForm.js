@@ -1,6 +1,7 @@
 import React from 'react';
-import { Form, Input, Button, Select, message } from 'antd';
+import { Form, Input, Button, Select, message, InputNumber } from 'antd';
 import axios from 'axios';
+
 
 const TicketForm = ({ initialValues, onSubmit }) => {
     const [form] = Form.useForm();
@@ -14,11 +15,12 @@ const TicketForm = ({ initialValues, onSubmit }) => {
                 setExhibitions(response.data);
             } catch (error) {
                 console.error('Ошибка при получении выставок:', error);
-                message.error('Не удалось загрузить выставки. Пожалуйста, попробуйте позже.'); // User feedback
+                message.error('Не удалось загрузить выставки. Пожалуйста, попробуйте позже.');
             }
         };
 
         fetchExhibitions();
+        
     }, []);
 
     React.useEffect(() => {
@@ -57,28 +59,45 @@ const TicketForm = ({ initialValues, onSubmit }) => {
             <Form.Item 
                 name="ticket_type" 
                 label="Тип билета" 
-                rules={[{ required: true, message: 'Пожалуйста, введите тип билета' }]}
+                rules={[{ required: true, message: 'Пожалуйста, выберите тип билета' }]}
             >
-                <Input placeholder="Введите тип билета" />
+                <Select placeholder="Выберите тип билета">
+                    <Select.Option key="Взрослый" value="Взрослый">
+                        Взрослый
+                    </Select.Option>
+                    <Select.Option key="Детский" value="Детский">
+                        Детский
+                    </Select.Option>
+                    <Select.Option key="Льготный" value="Льготный">
+                        Льготный
+                    </Select.Option>
+                    
+                </Select>
             </Form.Item>
             <Form.Item 
                 name="date" 
                 label="Дата" 
-                rules={[{ required: true, message: 'Пожалуйста, выберите дату' }]}
             >
                 <Input type="date" />
             </Form.Item>
             <Form.Item 
                 name="price" 
                 label="Стоимость" 
-                rules={[{ required: true, message: 'Пожалуйста, введите стоимость' }]}
+                rules={[
+                    { required: true, message: 'Пожалуйста, введите стоимость' },
+                    { 
+                        type: 'number', 
+                        min: 1, 
+                        message: 'Стоимость должна быть больше 0' 
+                    }
+                ]}
             >
-                <Input type="number" placeholder="Введите стоимость" />
+                <InputNumber placeholder="Введите стоимость" style={{ width: '100%' }} />
             </Form.Item>
+
             <Form.Item 
                 name="payment_method" 
                 label="Способ оплаты" 
-                rules={[{ required: true, message: 'Пожалуйста, введите способ оплаты' }]}
             >
                 <Input placeholder="Введите способ оплаты" />
             </Form.Item>
